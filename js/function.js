@@ -10,16 +10,13 @@ checkMaxLength('проверяемая строка', 10); // false
 
 function isPalindrome(word) {
   if (!word.length) {
-    return;
+    return false;
   }
   word = word.toLowerCase();
   word = word.replaceAll(' ', '');
-  let lastLetter = word.length - 1;
   for (let i = 0; i <= Math.round(word.length / 2); i++) {
-    if (word[i] !== word[lastLetter]) {
+    if (word[i] !== word[word.length - 1 - i]) {
       return false;
-    } else {
-      lastLetter -= 1;
     }
   }
   return true;
@@ -33,19 +30,20 @@ isPalindrome('ДовОд'); // true
 isPalindrome('Кекс'); // false
 isPalindrome('Лёша на полке клопа нашёл ');
 
-function takeNum(string) {
+function extractNum(word) {
+  word = word.toString();
   let result = '';
   const numbers = '0123456789';
-  for (let i = 0; i < string.length; i++) {
-    if (numbers.includes(string[i])) {
-      result += string[i];
+  for (let i = 0; i < word.length; i++) {
+    if (numbers.includes(word[i])) {
+      result += word[i];
     }
   }
   return parseInt(result, 10);
 }
 
-takeNum('2023 год'); // 2023
-takeNum('ECMAScript 2022'); // 2022
-takeNum('1 кефир, 0.5 батона'); // 105
-takeNum('агент 007'); // 7
-takeNum('а я томат'); // Nan
+extractNum(2023); // 2023
+extractNum('ECMAScript 2022'); // 2022
+extractNum('1 кефир, 0.5 батона'); // 105
+extractNum('агент 007'); // 7
+extractNum('а я томат'); // Nan
