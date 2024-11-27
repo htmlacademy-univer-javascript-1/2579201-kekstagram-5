@@ -14,3 +14,8 @@ globals:
 
 extends:
   "htmlacademy/vanilla"
+
+rules:
+  quotes: [1, "double", "avoid-escape"]
+  no-unused-vars: warn
+  no-console: warn
