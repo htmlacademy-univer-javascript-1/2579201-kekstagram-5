@@ -1,5 +1,5 @@
 import {getARandomNumber} from './utils.js';
-import {names, comments, descriptions} from './variables.js';
+import {names, comments, descriptions} from './constants.js';
 export function createArrayOfPhotos(){
   const photos = [];
   for (let i = 0; i < 25; i++){
@@ -29,4 +29,4 @@ export function createArrayOfComments(){
   }
   return newComments;
 }
-createArrayOfPhotos();
+

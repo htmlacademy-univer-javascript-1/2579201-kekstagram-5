@@ -1,4 +1,4 @@
-import './variables.js';
-import './utils.js';
-import './data.js';
+import {createArrayOfPhotos} from './data.js';
+
+createArrayOfPhotos();
 
