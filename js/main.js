@@ -1,2 +1,3 @@
-import './photos.js';
+import {generatePictures} from './photos.js';
 
+generatePictures();

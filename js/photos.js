@@ -1,18 +1,24 @@
 import {createArrayOfPhotos} from "./data.js";
-const picturesContainer = document.querySelector(".pictures");
-const pictureTemplate = document.querySelector("#picture").content.querySelector(".picture");
-const pictureFragment = document.createDocumentFragment();
 
-const photos = createArrayOfPhotos();
+export function generatePictures(){
+  const picturesContainer = document.querySelector(".pictures");
+  const pictureTemplate = document.querySelector("#picture").content.querySelector(".picture");
+  const pictureFragment = document.createDocumentFragment();
 
-photos.forEach((photo) => {
-  const picture = pictureTemplate.cloneNode(true);
+  const photos = createArrayOfPhotos();
 
-  picture.querySelector(".picture__img").src = photo.url;
-  picture.querySelector(".picture__comments").textContent = photo.comments.length;
-  picture.querySelector(".picture__likes").textContent = photo.likes;
+  photos.forEach((photo) => {
+    const {url, description, comments, likes} = photo;
+    const picture = pictureTemplate.cloneNode(true);
 
-  pictureFragment.append(picture);
-});
+    picture.querySelector(".picture__img").src = url;
+    picture.querySelector(".picture__img").alt = description;
+    picture.querySelector(".picture__comments").textContent = comments.length;
+    picture.querySelector(".picture__likes").textContent = likes;
 
-picturesContainer.append(pictureFragment);
+    pictureFragment.append(picture);
+  });
+
+  picturesContainer.append(pictureFragment);
+}
+
