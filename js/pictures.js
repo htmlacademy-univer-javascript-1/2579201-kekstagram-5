@@ -1,13 +1,13 @@
-import {createArrayOfPhotos} from "./data.js";
+import {createArrayOfPictures} from "./data.js";
 
 export function generatePictures(){
   const picturesContainer = document.querySelector(".pictures");
   const pictureTemplate = document.querySelector("#picture").content.querySelector(".picture");
   const pictureFragment = document.createDocumentFragment();
 
-  const photos = createArrayOfPhotos();
+  const pictures = createArrayOfPictures();
 
-  photos.forEach((photo) => {
+  pictures.forEach((photo) => {
     const {url, description, comments, likes} = photo;
     const picture = pictureTemplate.cloneNode(true);
 
