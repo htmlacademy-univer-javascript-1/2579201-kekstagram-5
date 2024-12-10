@@ -1,4 +1,3 @@
-import {createArrayOfPhotos} from './data.js';
+import {generatePictures} from './pictures.js';
 
-createArrayOfPhotos();
-
+generatePictures();

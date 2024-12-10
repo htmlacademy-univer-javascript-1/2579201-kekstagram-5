@@ -1,18 +1,18 @@
 import {getARandomNumber} from './utils.js';
 import {names, comments, descriptions} from './constants.js';
-export function createArrayOfPhotos(){
-  const photos = [];
+export function createArrayOfPictures(){
+  const pictures = [];
   for (let i = 0; i < 25; i++){
-    const newPhoto = {
+    const newPicture = {
       id : i + 1,
       url: `photos/${i + 1}.jpg`,
       description: descriptions[getARandomNumber(descriptions.length)],
       likes: getARandomNumber(200, 15),
       comments: createArrayOfComments(),
     };
-    photos.push(newPhoto);
+    pictures.push(newPicture);
   }
-  return photos;
+  return pictures;
 }
 
 export function createArrayOfComments(){
