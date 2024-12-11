@@ -1,2 +1,4 @@
-import './photos.js';
-import './popup.js';
+
+import {generatePictures} from './pictures.js';
+
+generatePictures();
