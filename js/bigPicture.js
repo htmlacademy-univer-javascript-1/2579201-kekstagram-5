@@ -2,19 +2,18 @@ export function bigPictureCloseInit(){
   const bigPicture = document.querySelector(".big-picture");
   const bigPictureCancel = bigPicture.querySelector(".big-picture__cancel");
 
-  function closeBigPicture(e){
-    if (e.type === "click"){
-      bigPicture.classList.add("hidden");
-      document.body.classList.remove("modal-open");
-    }
-    if (document.body.classList.contains("modal-open") && e.key === "Escape"){
-      bigPicture.classList.add("hidden");
-      document.body.classList.remove("modal-open");
-    }
+  function closeBigPicture(){
+    bigPicture.classList.add("hidden");
+    document.body.classList.remove("modal-open");
   }
-
+  document.querySelector(".big-picture").classList.remove("hidden");
+  document.body.classList.add("modal-open");
   bigPictureCancel.addEventListener("click", closeBigPicture);
-  document.addEventListener("keydown", closeBigPicture);
+  document.addEventListener("keydown", (e)=>{
+    if (e.key === "Escape"){
+      closeBigPicture();
+    }
+  });
 }
 
 export function updateBigPicture(url, description, comments, likes){

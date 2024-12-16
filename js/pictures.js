@@ -1,5 +1,5 @@
 import {createArrayOfPictures} from "./data.js";
-import {updateBigPicture} from "./bigPicture.js";
+import {updateBigPicture, bigPictureCloseInit} from "./bigPicture.js";
 export function generatePictures(){
   const picturesContainer = document.querySelector(".pictures");
   const pictureTemplate = document.querySelector("#picture").content.querySelector(".picture");
@@ -19,8 +19,7 @@ export function generatePictures(){
     pictureFragment.append(picture);
     picture.addEventListener("click", (e) =>{
       e.preventDefault();
-      document.querySelector(".big-picture").classList.remove("hidden");
-      document.body.classList.add("modal-open");
+      bigPictureCloseInit();
       updateBigPicture(url, description, comments, likes);
     });
   });
