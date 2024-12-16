@@ -1,5 +1,5 @@
-import {getARandomNumber} from './utils.js';
-import {names, comments, descriptions} from './constants.js';
+import {getARandomNumber} from "./utils.js";
+import {names, comments, descriptions} from "./constants.js";
 export function createArrayOfPictures(){
   const pictures = [];
   for (let i = 0; i < 25; i++){
@@ -22,7 +22,7 @@ export function createArrayOfComments(){
     const newComment = {
       id: i + 1,
       avatar: `img/avatar-${getARandomNumber(6, 1)}.svg`,
-      message: Array.from({ length: getARandomNumber(2, 1) }, () => comments[getARandomNumber(comments.length)]).join('\n'),
+      message: Array.from({ length: getARandomNumber(2, 1) }, () => comments[getARandomNumber(comments.length)]).join("\n"),
       name: names[getARandomNumber(names.length)],
     };
     newComments.push(newComment);
