@@ -26,7 +26,8 @@ export function updateBigPicture(url, description, comments, likes){
   bigPictureLikes.textContent = likes;
   bigPictureCommentCounter.textContent = comments.length;
   bigPictureDescription.textContent = description;
-  renderComments(comments);
+  const commentsCopy = [...comments];
+  updateComments(commentsCopy);
 }
 
 function renderComments(comments){
@@ -41,6 +42,44 @@ function renderComments(comments){
     `;
     commentList.appendChild(li);
   });
+}
 
 
+function renderCommentsCounter(renderedComments){
+  const displayedComments = document.querySelector(".social__comment-count");
+  displayedComments.firstChild.textContent = `${renderedComments.length} из `;
+}
+
+
+function updateComments(comments) {
+  const displayedComments = document.querySelector(".social__comment-count");
+  const commentsLoader = document.querySelector(".comments-loader");
+
+  const renderedComments = comments.slice(0, 5);
+  const outstandingComments = comments.slice(5);
+
+  function loadCommentsHandler(){
+    renderedComments.push(...outstandingComments.slice(0, 5));
+    outstandingComments.splice(0, 5);
+    renderComments(renderedComments);
+    renderCommentsCounter(renderedComments);
+
+    if (outstandingComments.length === 0) {
+      commentsLoader.classList.add("hidden");
+      commentsLoader.removeEventListener("click", loadCommentsHandler);
+    }
+  }
+
+  commentsLoader.removeEventListener("click", loadCommentsHandler);
+  commentsLoader.addEventListener("click", loadCommentsHandler);
+
+  displayedComments.classList.remove("hidden");
+  commentsLoader.classList.remove("hidden");
+
+  renderComments(renderedComments);
+  renderCommentsCounter(renderedComments);
+
+  if (outstandingComments.length === 0) {
+    commentsLoader.classList.add("hidden");
+  }
 }

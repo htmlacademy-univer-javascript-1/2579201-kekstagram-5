@@ -10,8 +10,6 @@ export function generatePictures(){
   pictures.forEach((photo) => {
     const {url, description, comments, likes} = photo;
     const picture = pictureTemplate.cloneNode(true);
-    document.querySelector(".social__comment-count").classList.add("hidden");
-    document.querySelector(".comments-loader").classList.add("hidden");
     picture.querySelector(".picture__img").src = url;
     picture.querySelector(".picture__img").alt = description;
     picture.querySelector(".picture__comments").textContent = comments.length;
