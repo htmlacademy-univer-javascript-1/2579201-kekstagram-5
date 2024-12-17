@@ -26,8 +26,7 @@ export function updateBigPicture(url, description, comments, likes){
   bigPictureLikes.textContent = likes;
   bigPictureCommentCounter.textContent = comments.length;
   bigPictureDescription.textContent = description;
-  const commentsCopy = [...comments];
-  updateComments(commentsCopy);
+  updateComments([...comments]);
 }
 
 function renderComments(comments){
@@ -70,7 +69,6 @@ function updateComments(comments) {
     }
   }
 
-  commentsLoader.removeEventListener("click", loadCommentsHandler);
   commentsLoader.addEventListener("click", loadCommentsHandler);
 
   displayedComments.classList.remove("hidden");
@@ -81,5 +79,6 @@ function updateComments(comments) {
 
   if (outstandingComments.length === 0) {
     commentsLoader.classList.add("hidden");
+    commentsLoader.removeEventListener("click", loadCommentsHandler);
   }
 }
