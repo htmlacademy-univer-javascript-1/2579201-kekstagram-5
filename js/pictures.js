@@ -1,5 +1,5 @@
 import {createArrayOfPictures} from "./data.js";
-import {updateBigPicture, bigPictureCloseInit} from "./bigPicture.js";
+import {updateBigPicture} from "./bigPicture.js";
 export function generatePictures(){
   const picturesContainer = document.querySelector(".pictures");
   const pictureTemplate = document.querySelector("#picture").content.querySelector(".picture");
@@ -17,7 +17,7 @@ export function generatePictures(){
     pictureFragment.append(picture);
     picture.addEventListener("click", (e) =>{
       e.preventDefault();
-      bigPictureCloseInit();
+      // bigPictureCloseInit();
       updateBigPicture(url, description, comments, likes);
     });
   });
