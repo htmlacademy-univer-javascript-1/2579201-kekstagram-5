@@ -55,7 +55,7 @@ function updateComments(comments) {
   const commentsLoader = document.querySelector(".comments-loader");
 
   const renderedComments = comments.slice(0, 5);
-  let outstandingComments = comments.slice(5);
+  const outstandingComments = comments.slice(5);
 
   function loadCommentsHandler(){
     renderedComments.push(...outstandingComments.slice(0, 5));
