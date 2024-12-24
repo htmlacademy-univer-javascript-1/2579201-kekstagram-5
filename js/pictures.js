@@ -17,7 +17,6 @@ export function generatePictures(){
     pictureFragment.append(picture);
     picture.addEventListener("click", (e) =>{
       e.preventDefault();
-      // bigPictureCloseInit();
       updateBigPicture(url, description, comments, likes);
     });
   });
