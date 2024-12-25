@@ -81,7 +81,6 @@ function validateHandler(){
   pristine.addValidator(hashtags, (value) => {
     const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i;
     const tags = value.split(" ").map((tag) => tag.toLowerCase().trim()).filter((tag) => tag.length > 0);
-    console.log(tags);
     if (tags.every((tag) => tag[0] === "#" && HASHTAG_REGEX.test(tag))) {
       return true;
     } else {
