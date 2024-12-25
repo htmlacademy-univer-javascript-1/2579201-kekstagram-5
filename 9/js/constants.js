@@ -27,6 +27,5 @@ const comments = [
 
 const names = ["Елизавета", "Алексей", "Михаил", "Александр", "Владимир", "София"];
 
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-export {names, comments, descriptions, FILE_TYPES};
+export {names, comments, descriptions};

@@ -1,33 +1,29 @@
 
-import {FILE_TYPES} from "./constants.js";
 export function uploadPhotoHandler(){
   const uploadForm = document.querySelector(".img-upload__form");
-  const closeBtn = document.querySelector(".img-upload__cancel");
   const uploadFile = document.querySelector("#upload-file");
 
   uploadForm.addEventListener("change", ()=>{
-    // openForm(uploadFile.files[0]);
-    openForm();
+    openForm(uploadFile.files[0]);
+
   });
-
-
-  closeBtn.addEventListener("click", closeForm);
-  document.addEventListener("keydown", closeFormByKey);
 
 }
 
 
 function openForm(file){
-  // const fileName = file.name.toLowerCase();
-  // const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-  // if (matches) {
-  // const filePath = URL.createObjectURL(file);
+  const filePath = URL.createObjectURL(file);
   const uploadOverlay = document.querySelector(".img-upload__overlay");
+  const closeBtn = document.querySelector(".img-upload__cancel");
+
   uploadOverlay.classList.remove("hidden");
   document.body.classList.add("modal-open");
-  // updatePreviewImage(filePath);
+
+  updatePreviewImage(filePath);
   validateHandler();
-  // }
+
+  closeBtn.addEventListener("click", closeForm);
+  document.addEventListener("keydown", closeFormByKey);
 }
 
 function updatePreviewImage(file){
@@ -45,16 +41,22 @@ function closeForm(){
   const uploadFile = document.querySelector("#upload-file");
   const hashtags = document.querySelector(".text__hashtags");
   const comment = document.querySelector(".text__description");
+  const closeBtn = document.querySelector(".img-upload__cancel");
 
   hashtags.value = "";
   comment.value = "";
   const formError = document.querySelector(".form__error");
 
-  formError.innerHTML = "";
+  if (formError) {
+    formError.innerHTML = "";
+  }
   uploadOverlay.classList.add("hidden");
   document.body.classList.remove("modal-open");
 
   uploadFile.value = "";
+
+  closeBtn.removeEventListener("click", closeForm);
+  document.removeEventListener("keydown", closeFormByKey);
 }
 
 function closeFormByKey(e){
@@ -74,11 +76,12 @@ function validateHandler(){
     errorTextClass: "form__error"
   });
 
-  const hashtags = document.querySelector(".text__hashtags");
   const comment = document.querySelector(".text__description");
+  const hashtags = document.querySelector(".text__hashtags");
   pristine.addValidator(hashtags, (value) => {
-    const tags = value.split(" ").map((tag) => tag.toLowerCase());
-    if (tags.every((tag) => tag[0] === "#")) {
+    const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i;
+    const tags = value.split(" ").map((tag) => tag.toLowerCase().trim());
+    if (tags.every((tag) => tag[0] === "#") && HASHTAG_REGEX.test(value)) {
       return true;
     } else {
       return false;
@@ -86,7 +89,7 @@ function validateHandler(){
   }, "Неправильный формат хэштега", 2, false);
 
   pristine.addValidator(hashtags, (value)=> {
-    const tags = value.split(" ").map((tag) => tag.toLowerCase());
+    const tags = value.split(" ").map((tag) => tag.toLowerCase().trim());
     const uniqueTags = new Set(tags);
 
     return tags.length === uniqueTags.size;
@@ -102,4 +105,3 @@ function validateHandler(){
     }
   });
 }
-
