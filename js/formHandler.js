@@ -80,8 +80,9 @@ function validateHandler(){
   const hashtags = document.querySelector(".text__hashtags");
   pristine.addValidator(hashtags, (value) => {
     const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i;
-    const tags = value.split(" ").map((tag) => tag.toLowerCase().trim());
-    if (tags.every((tag) => tag[0] === "#") && HASHTAG_REGEX.test(value)) {
+    const tags = value.split(" ").map((tag) => tag.toLowerCase().trim()).filter((tag) => tag.length > 0);
+    console.log(tags);
+    if (tags.every((tag) => tag[0] === "#" && HASHTAG_REGEX.test(tag))) {
       return true;
     } else {
       return false;
@@ -89,7 +90,7 @@ function validateHandler(){
   }, "Неправильный формат хэштега", 2, false);
 
   pristine.addValidator(hashtags, (value)=> {
-    const tags = value.split(" ").map((tag) => tag.toLowerCase().trim());
+    const tags = value.split(" ").map((tag) => tag.toLowerCase().trim()).filter((tag) => tag.length > 0);
     const uniqueTags = new Set(tags);
 
     return tags.length === uniqueTags.size;
