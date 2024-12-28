@@ -1,32 +1,31 @@
-import {getARandomNumber} from "./utils.js";
-import {names, comments, descriptions} from "./constants.js";
-export function createArrayOfPictures(){
-  const pictures = [];
-  for (let i = 0; i < 25; i++){
-    const newPicture = {
-      id : i + 1,
-      url: `photos/${i + 1}.jpg`,
-      description: descriptions[getARandomNumber(descriptions.length)],
-      likes: getARandomNumber(200, 15),
-      comments: createArrayOfComments(),
-    };
-    pictures.push(newPicture);
+export async function getArrayOfPictures(){
+  try {
+    const response = await fetch("https://29.javascript.htmlacademy.pro/kekstagram/data");
+    if (!response.ok) {
+      throw new Error("Данные не были загружены");
+    }
+    const pictures = await response.json();
+    return pictures;
+  } catch (error) {
+    errorHandler(error);
+    throw new Error("Ошибка");
   }
-  return pictures;
 }
 
-export function createArrayOfComments(){
-  const randomNumberOfComments = getARandomNumber(30);
-  const newComments = [];
-  for (let i = 0; i < randomNumberOfComments; i++){
-    const newComment = {
-      id: i + 1,
-      avatar: `img/avatar-${getARandomNumber(6, 1)}.svg`,
-      message: Array.from({ length: getARandomNumber(2, 1) }, () => comments[getARandomNumber(comments.length)]).join("\n"),
-      name: names[getARandomNumber(names.length)],
-    };
-    newComments.push(newComment);
+export async function sendData(data) {
+  const response = await fetch("https://29.javascript.htmlacademy.pro/kekstagram", {
+    method: "POST",
+    body: data,
+  });
+  if (!response.ok) {
+    throw new Error("Ошибка");
   }
-  return newComments;
 }
 
+function errorHandler(text){
+  const picturesError = document.querySelector('.pictures__error');
+  picturesError.classList.remove('hidden');
+  const errorText = picturesError.querySelector('h3');
+  errorText.textContent = text;
+  document.body.style.pointerEvents = 'none';
+}

@@ -189,9 +189,22 @@ main {
   display: -ms-grid;
   display: grid;
   grid-gap: 10px;
+  position: relative;
 
   -ms-grid-columns: (1fr)[7];
       grid-template-columns: repeat(7, 1fr);
+}
+
+.pictures__error{
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  z-index: 3;
+  padding: 10px;
+  background: #000;
+  color: red;
+  text-align: center;
+  min-height: 50px;
 }
 
 .picture {
