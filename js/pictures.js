@@ -1,12 +1,11 @@
-import {createArrayOfPictures} from "./data.js";
+import {getArrayOfPictures} from "./data.js";
 import {updateBigPicture} from "./bigPicture.js";
-export function generatePictures(){
+export async function generatePictures(){
   const picturesContainer = document.querySelector(".pictures");
   const pictureTemplate = document.querySelector("#picture").content.querySelector(".picture");
   const pictureFragment = document.createDocumentFragment();
 
-  const pictures = createArrayOfPictures();
-
+  const pictures = await getArrayOfPictures();
   pictures.forEach((photo) => {
     const {url, description, comments, likes} = photo;
     const picture = pictureTemplate.cloneNode(true);

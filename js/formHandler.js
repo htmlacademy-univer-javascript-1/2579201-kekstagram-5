@@ -1,3 +1,5 @@
+import { sendData } from "./data.js";
+
 
 export function uploadPhotoHandler(){
   const uploadForm = document.querySelector(".img-upload__form");
@@ -101,7 +103,44 @@ function validateHandler(){
     e.preventDefault();
     const valid = pristine.validate();
     if (valid){
+      submitForm();
       closeForm();
     }
   });
+}
+
+function submitForm(){
+  const data = new FormData(document.querySelector(".img-upload__form"));
+  const successTemplate = document.querySelector("#success").content.querySelector(".success");
+  const errorTemplate = document.querySelector("#error").content.querySelector(".error");
+  sendData(data)
+    .then(()=>messageHandler(successTemplate))
+    .catch(()=>messageHandler(errorTemplate));
+}
+
+function messageHandler(element){
+  const message = element.cloneNode(true);
+  document.body.appendChild(message);
+
+  const button = message.querySelector("button");
+  function closeByEsc(e){
+    if (e.key === "Escape"){
+      closeMessage();
+    }
+  }
+  function closeByClick(e){
+    if (!message.querySelector("div").contains(e.target)){
+      closeMessage();
+    }
+  }
+
+  button.addEventListener("click", closeMessage);
+  document.addEventListener("keydown", closeByEsc);
+  document.addEventListener("click", closeByClick);
+
+  function closeMessage() {
+    message.remove();
+    document.removeEventListener("keydown", closeByEsc);
+    document.removeEventListener("click", closeByClick);
+  }
 }
