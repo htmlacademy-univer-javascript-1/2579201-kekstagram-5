@@ -102,7 +102,7 @@ function validateHandler(){
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const valid = pristine.validate();
-    if (valid && hashtags.value.length > 0 && comment.value.length > 0){
+    if (valid){
       submitForm();
       closeForm();
     }

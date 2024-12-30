@@ -4,8 +4,7 @@ export async function getArrayOfPictures(){
     if (!response.ok) {
       throw new Error("Данные не были загружены");
     }
-    const pictures = await response.json();
-    return pictures;
+    return response.json();
   } catch (error) {
     errorHandler(error);
     throw new Error("Ошибка");
